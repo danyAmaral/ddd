@@ -2,7 +2,6 @@ import Order from "../../../domain/entity/order";
 import OrderItem from "../../../domain/entity/order_item";
 import OrderItemModel from "../../db/sequelize/model/order-item.model";
 import OrderModel from "../../db/sequelize/model/order.model";
-import { Sequelize } from "sequelize-typescript";
 
 export default class OrderRepository {
   async create(entity: Order): Promise<void> {
@@ -23,6 +22,50 @@ export default class OrderRepository {
         include: [OrderItemModel],
       }
     );
+  }
+
+  async find(id: string): Promise<Order> {
+    const orderModel = await OrderModel.findOne({
+      where: { id: id },
+      include: OrderItemModel,
+    });
+
+    const items = orderModel.items.map((model: OrderItemModel) => {
+      return new OrderItem(
+        model.id,
+        model.name,
+        model.price,
+        model.product_id,
+        model.quantity
+      );
+    });
+
+    const order = new Order(orderModel.id, orderModel.customer_id, items);
+
+    return order;
+  }
+
+  async findAll(): Promise<Order[]> {
+    const ordersModel = await OrderModel.findAll({
+      include: OrderItemModel,
+    });
+
+    const orders: Order[] = [];
+
+    for (const orderModel of ordersModel) {
+      const items = orderModel.items.map((model) => {
+        return new OrderItem(
+          model.id,
+          model.name,
+          model.price,
+          model.product_id,
+          model.quantity
+        );
+      });
+      orders.push(new Order(orderModel.id, orderModel.customer_id, items));
+    }
+
+    return orders;
   }
 
   async update(entity: Order): Promise<void> {
