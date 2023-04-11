@@ -235,11 +235,7 @@ describe("order repository test", () => {
     await orderRepository.create(order);
     await orderRepository.create(order2);
 
-    const orderModel = await OrderModel.findAll({
-      include: OrderItemModel,
-    });
     const foundedOrders = await orderRepository.findAll();
-
     const orders = [order, order2];
 
     expect(orders).toStrictEqual(foundedOrders);
