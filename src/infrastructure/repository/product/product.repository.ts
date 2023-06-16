@@ -1,4 +1,4 @@
-import Product from "../../../domain/entity/product";
+import Product from "../../../domain/entity/product/product";
 import ProductRepositoryInterface from "../../../domain/repository/product-repository.interface";
 import ProductModel from "../../db/sequelize/model/product.model";
 
