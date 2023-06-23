@@ -1,4 +1,4 @@
-import Customer from "../../../domain/entity/customer";
+import Customer from "../../../domain/entity/custumer/customer";
 import CustomerRepositoryInterface from "../../../domain/repository/customer-repository.interface";
 import Address from "../../../value-object/adress";
 import CustomerModel from "../../db/sequelize/model/customer.model";

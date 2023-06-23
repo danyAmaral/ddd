@@ -4,7 +4,7 @@ import OrderModel from "../../db/sequelize/model/order.model";
 import OrderItemModel from "../../db/sequelize/model/order-item.model";
 import ProductModel from "../../db/sequelize/model/product.model";
 import CustomerRepository from "../customer/customer.repository";
-import Customer from "../../../domain/entity/customer";
+import Customer from "../../../domain/entity/custumer/customer";
 import Address from "../../../value-object/adress";
 import ProductRepository from "../product/product.repository";
 import OrderItem from "../../../domain/entity/order_item";
